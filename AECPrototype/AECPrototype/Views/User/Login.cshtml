@@ -1,0 +1,30 @@
+﻿@{
+	TempData["Title"] = "Login";
+}
+
+<div class="page-wrapper">
+	<div class="page-content">
+		<form asp-controller="User" asp-action="Login">
+			<div class="page-header">
+				<h1>Login to your Account</h1>
+				<p>Please Login with your account details that were given to you!</p>
+			</div>
+
+			<div class="input-form">
+				<ion-icon name="person-outline"></ion-icon>
+
+				<div class="input-box">
+					<input type="text" autocomplete="off" required>
+					<label>Email</label>
+				</div>
+
+				<div class="input-box">
+					<input type="password" autocomplete="off" required>
+					<label>Password</label>
+				</div>
+
+				<button class="large-btn" type="submit">Login</button>
+			</div>
+		</form>
+	</div>
+</div>

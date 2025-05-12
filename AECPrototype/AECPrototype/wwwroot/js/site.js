@@ -1,4 +1,19 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const sidebar = document.querySelector('.sidebar');
+const toggleBtn = document.querySelector('.toggle-btn');
 
-// Write your JavaScript code.
+const popupBox = document.querySelector('.popup-box');
+const showPopup = document.querySelector('.show-popup');
+const closePopup = document.querySelector('.btn-close');
+
+toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+});
+
+
+showPopup.addEventListener('click', () => {
+    popupBox.classList.add('active');
+});
+
+closePopup.addEventListener('click', () => {
+    popupBox.classList.remove('active');
+});

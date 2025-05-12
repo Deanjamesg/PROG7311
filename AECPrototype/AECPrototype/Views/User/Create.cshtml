@@ -1,0 +1,46 @@
+﻿@model AECPrototype.Models.User
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="page-wrapper">
+    <div class="page-content">
+
+		<div class="page-header">
+			<h1>Create a New User</h1>
+			<p>Please enter in the user's personal details to create an account for them.</p>
+		</div>
+
+		<div class="input-form">
+			<ion-icon name="person-outline"></ion-icon>
+
+			<div class="input-box">
+				<input type="text" autocomplete="off" required>
+				<label>First Name</label>
+			</div>
+
+			<div class="input-box">
+				<input type="text" autocomplete="off" required>
+				<label>Last Name</label>
+			</div>
+
+			<div class="input-box">
+				<input type="email" autocomplete="off" required>
+				<label>Email</label>
+			</div>
+
+			<div class="input-box">
+				<input type="password" autocomplete="off" required>
+				<label>Password</label>
+			</div>
+
+			<div class="input-box">
+				<input type="password" autocomplete="off" required>
+				<label>Confirm Password</label>
+			</div>
+
+			<button class="large-btn" type="submit">Login</button>
+		</div>
+
+    </div>
+</div>

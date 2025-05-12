@@ -1,8 +1,60 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="page-wrapper">
+	<div class="page-content">
+
+		<div class="page-header">
+			<h1>Agri Energy Connect</h1>
+			<p>Welcome to Agri Energy Connect! This is a prototype web application of AEC. </p>
+			<p>Use the navigation menu on the left to explore other pages!. </p>
+		</div>
+
+		<div class="page-info">
+			<p>To navigate any further please Login, and if you have any problems please contact us!</p>
+			<button class="show-popup animate__animated animate__pulse animate__delay-3s animate__repeat-3">Login</button>
+
+		</div>
+		<div class="box-container">
+			<div class="box">
+				<h2>Market place</h2>
+				<p>Explore the market place full of green energy solutions tailored to your agricultural needs!</p>
+				<i class='bx bx-cart'></i>
+			</div>
+			<div class="box">
+				<h2>Products</h2>
+				<p>Add your products to your profile, where you can categorize, edit & view them all!</p>
+				<i class='bx bx-plus'></i>
+			</div>
+			<div class="box">
+				<h2>Forums</h2>
+				<p>Connect, share & seek advice for sustainable practices with other farmers on our forums!</p>
+				<i class='bx bx-message-rounded-dots'></i>
+			</div>
+			<div class="box">
+				<h2>Feedback</h2>
+				<p>Please share your feedback to help us improve your experience!</p>
+				<i class='bx bx-right-top-arrow-circle'></i>
+			</div>
+		</div>
+
+		<form asp-controller="User" asp-action="Login" class="popup-box">
+			<ion-icon name="person-outline"></ion-icon>
+			<ion-icon class="btn-close" name="close-outline"></ion-icon>
+
+			<div class="input-box">
+				<input type="text" autocomplete="off" required>
+				<label>Email</label>
+			</div>
+
+			<div class="input-box">
+				<input type="password" autocomplete="off" required>
+				<label>Password</label>
+			</div>
+
+			<button class="large-btn" type="submit">Login</button>
+		</form>
+
+	</div>
 </div>
