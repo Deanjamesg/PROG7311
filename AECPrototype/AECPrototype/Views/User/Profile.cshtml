@@ -1,4 +1,6 @@
-﻿@{
+﻿@using AECPrototype.ViewModel;
+@model UserViewModel;
+@{
 	TempData["Title"] = "Profile";
 }
 
@@ -11,8 +13,21 @@
 			<p>If you wish to make any changes, click on the edit icon next to the section you wish to change.</p>
 		</div>
 
-		<div class="account-details">
-
+		<div class="page-info">
+			@if (Model != null)
+			{
+				<div class="account-details">
+					<p>User ID: @Model.UserId</p>
+					<p>User First Name: @Model.FirstName</p>
+					<p>User Last Name: @Model.LastName</p>
+					<p>User Email: @Model.Email</p>
+					<p>User Password: @Model.Password</p>
+					@foreach (var role in Model.Role)
+					{
+						<p>User Role: @role</p>
+					}
+				</div>
+			}
 		</div>
 
 	</div>

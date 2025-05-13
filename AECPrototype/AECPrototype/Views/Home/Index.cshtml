@@ -1,4 +1,7 @@
-﻿@{
+﻿@using AECPrototype.ViewModel;
+@model LoginViewModel;
+
+@{
 	ViewData["Title"] = "Home Page";
 }
 
@@ -39,20 +42,20 @@
 			</div>
 		</div>
 
-		<form asp-controller="User" asp-action="Login" class="popup-box">
+		<form asp-controller="User" asp-action="Login" class="popup-box" method="post">
 			<ion-icon name="person-outline"></ion-icon>
 			<ion-icon class="btn-close" name="close-outline"></ion-icon>
 
 			<div class="input-box">
-				<input type="text" autocomplete="off" required>
-				<label>Email</label>
+				<input type="email" autocomplete="off" asp-for="Email" placeholder="">
+				<label asp-for="Email">Email</label>
 			</div>
 
 			<div class="input-box">
-				<input type="password" autocomplete="off" required>
-				<label>Password</label>
+				<input type="password" autocomplete="off" asp-for="Password" placeholder="">
+				<label asp-for="Password">Password</label>
+				
 			</div>
-
 			<button class="large-btn" type="submit">Login</button>
 		</form>
 

@@ -1,30 +1,37 @@
-﻿@{
+﻿@using AECPrototype.ViewModel;
+@model LoginViewModel;
+@{
 	TempData["Title"] = "Login";
 }
 
 <div class="page-wrapper">
 	<div class="page-content">
-		<form asp-controller="User" asp-action="Login">
-			<div class="page-header">
-				<h1>Login to your Account</h1>
-				<p>Please Login with your account details that were given to you!</p>
-			</div>
+
+		<div class="page-header">
+			<h1>Login to your Account</h1>
+			<p>Please Login with your account details that were given to you!</p>
+		</div>
+
+		<form asp-controller="User" asp-action="Login" method="post">
 
 			<div class="input-form">
 				<ion-icon name="person-outline"></ion-icon>
 
 				<div class="input-box">
-					<input type="text" autocomplete="off" required>
-					<label>Email</label>
+					<input asp-for="Email" type="email" autocomplete="off" placeholder="">
+					<label asp-for="Email">Email</label>
 				</div>
 
 				<div class="input-box">
-					<input type="password" autocomplete="off" required>
-					<label>Password</label>
+					<input asp-for="Password" type="password" autocomplete="off" placeholder="">
+					<label asp-for="Password">Password</label>
 				</div>
 
+				<span asp-validation-for="Email" class="text-danger"></span>
 				<button class="large-btn" type="submit">Login</button>
 			</div>
+
 		</form>
+
 	</div>
 </div>
