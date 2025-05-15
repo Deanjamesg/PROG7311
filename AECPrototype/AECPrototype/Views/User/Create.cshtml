@@ -2,6 +2,12 @@
 @model RegisterViewModel;
 @{
     ViewData["Title"] = "CreateUser";
+	var roleOptions = new List<SelectListItem>
+	{
+		new SelectListItem { Value = "", Text = "Role" },
+		new SelectListItem { Value = "Farmer", Text = "Farmer" },
+		new SelectListItem { Value = "Employee", Text = "Employee" }
+	};
 }
 
 <div class="page-wrapper">
@@ -11,11 +17,9 @@
 			<h1>Create a New User</h1>
 			<p>Please enter in the user's personal details to create an account for them.</p>
 		</div>
-
 		
 			<form asp-controller="User" asp-action="Create" method="post">
 			<div class="input-form">
-				
 
 				<div class="input-container">
 					<div class="input-box">
@@ -39,10 +43,11 @@
 					</div>
 
 					<div class="input-box">
-						<input asp-for="Role" type="text" autocomplete="off" placeholder="" />
-						<label asp-for="Role">Role</label>
+						<select asp-for="Role" asp-items="roleOptions" class="styled-select">
+						</select>
 						<span asp-validation-for="Role" class="text-danger"></span>
 					</div>
+
 				</div>
 
 				<div class="input-container">
@@ -58,10 +63,20 @@
 						<span asp-validation-for="ConfirmPassword" class="text-danger"></span>
 					</div>
 				</div>
+
+				@if (!string.IsNullOrEmpty(ViewBag.SuccessMessage))
+				{
+					<div class="alert alert-success">@ViewBag.SuccessMessage</div>
+				}
 				<button class="large-btn" type="submit">Create New User</button>
 			</div>
 			</form>
 		
-
     </div>
 </div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

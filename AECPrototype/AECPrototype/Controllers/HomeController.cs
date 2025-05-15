@@ -1,6 +1,5 @@
 using System.Diagnostics;
 using AECPrototype.Models;
-using AECPrototype.Services;
 using AECPrototype.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,19 +8,19 @@ namespace AECPrototype.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
+        private readonly SignInManager<User> signInManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> _logger, SignInManager<User> _signInManager)
         {
-            _logger = logger;
+            logger = _logger;
+            signInManager = _signInManager;
         }
 
         public IActionResult Index(LoginViewModel user)
         {
-            if (ModelState.IsValid)
-            {
-                return View(user);
-            }
+            ViewBag.IsSignedIn = signInManager.IsSignedIn(User);
+
             return View();
         }
 

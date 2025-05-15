@@ -1,24 +1,22 @@
-﻿@using AECPrototype.ViewModel;
-@model LoginViewModel;
-
-@{
+﻿@{
 	ViewData["Title"] = "Home Page";
 }
 
 <div class="page-wrapper">
 	<div class="page-content">
 
-		<div class="page-header">
+		<div class="home-header">
 			<h1>Agri Energy Connect</h1>
 			<p>Welcome to Agri Energy Connect! This is a prototype web application of AEC. </p>
 			<p>Use the navigation menu on the left to explore other pages!. </p>
 		</div>
 
-		<div class="page-info">
-			<p>To navigate any further please Login, and if you have any problems please contact us!</p>
-			<button class="show-popup animate__animated animate__pulse animate__delay-3s animate__repeat-3">Login</button>
-
-		</div>
+		@if (!ViewBag.IsSignedIn)
+		{
+			<div class="page-info">
+				<p>To navigate any further please Login, and if you have any problems please contact us!</p>
+			</div>
+		}
 		<div class="box-container">
 			<div class="box">
 				<h2>Market place</h2>
@@ -41,23 +39,6 @@
 				<i class='bx bx-right-top-arrow-circle'></i>
 			</div>
 		</div>
-
-		<form asp-controller="User" asp-action="Login" class="popup-box" method="post">
-			<ion-icon name="person-outline"></ion-icon>
-			<ion-icon class="btn-close" name="close-outline"></ion-icon>
-
-			<div class="input-box">
-				<input type="email" autocomplete="off" asp-for="Email" placeholder="">
-				<label asp-for="Email">Email</label>
-			</div>
-
-			<div class="input-box">
-				<input type="password" autocomplete="off" asp-for="Password" placeholder="">
-				<label asp-for="Password">Password</label>
-				
-			</div>
-			<button class="large-btn" type="submit">Login</button>
-		</form>
 
 	</div>
 </div>

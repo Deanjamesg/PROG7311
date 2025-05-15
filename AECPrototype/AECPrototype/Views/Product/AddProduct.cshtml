@@ -1,2 +1,71 @@
-﻿@{
+﻿@using AECPrototype.ViewModel;
+@model AddProductViewModel;
+@{
+    ViewData["Title"] = "CreateProduct";
+
+    var productCategories = new List<string> {
+        "Fruits",
+        "Vegetables",
+        "Dairy",
+        "Grains",
+        "Meats",
+        "Poultry & Eggs",
+        "Herbs & Spices",
+        "Honey & Jams",
+        "Juices",
+        "Flowers & Plants",
+        "Other"
+    };
+}
+
+<div class="page-wrapper">
+    <div class="page-content">
+
+        <div class="page-header">
+            <h1>Add a New Product</h1>
+            <p>Please enter the product details below.</p>
+        </div>
+
+        <form asp-controller="Product" asp-action="AddProduct" method="post">
+
+            <div class="input-form">
+
+                <div class="input-container">
+                    <div class="input-box">
+                        <input asp-for="Title" type="text" autocomplete="off" placeholder="" />
+                        <label asp-for="Title">Product Title</label>
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+
+                    <div class="input-box">
+                        <select asp-for="Category" class="styled-select">
+                            <option value="">Select Category</option>
+                            @foreach (var category in productCategories)
+                            {
+                                <option value="@category">@category</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Category" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="input-container">
+                    <div class="input-box">
+                        <input asp-for="Date" type="date" autocomplete="off" placeholder="" />
+                        <label asp-for="Date">Production Date</label>
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <button class="large-btn" type="submit">Add Product</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

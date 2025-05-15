@@ -1,5 +1,8 @@
 ﻿@using AECPrototype.ViewModel;
 @model LoginViewModel;
+@section Styles {
+	<link rel="stylesheet" href="~/css/login-style.css" asp-append-version="true" />
+}
 @{
 	TempData["Title"] = "Login";
 }
@@ -18,20 +21,39 @@
 				<ion-icon name="person-outline"></ion-icon>
 
 				<div class="input-box">
+					<ion-icon name="mail"></ion-icon>
 					<input asp-for="Email" type="email" autocomplete="off" placeholder="">
 					<label asp-for="Email">Email</label>
+					<span asp-validation-for="Email" class="text-danger"></span>
 				</div>
 
 				<div class="input-box">
+					<ion-icon name="lock-closed"></ion-icon>
 					<input asp-for="Password" type="password" autocomplete="off" placeholder="">
 					<label asp-for="Password">Password</label>
+					<span asp-validation-for="Password" class="text-danger"></span>
 				</div>
 
-				<span asp-validation-for="Email" class="text-danger"></span>
+				<div class="input-box-remember">
+					<input asp-for="RememberMe" type="checkbox" />
+					<label asp-for="RememberMe">Remember me</label>
+				</div>
+				
 				<button class="large-btn" type="submit">Login</button>
+
+				@if (!string.IsNullOrEmpty(ViewBag.FailedMessage))
+				{
+					<div class="alert alert-fail">@ViewBag.FailedMessage</div>
+				}
 			</div>
 
 		</form>
 
 	</div>
 </div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

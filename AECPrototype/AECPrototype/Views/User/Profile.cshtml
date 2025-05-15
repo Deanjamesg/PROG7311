@@ -10,22 +10,17 @@
 		<div class="page-header">
 			<h1>Account Details</h1>
 			<p>These are all your personal account details.</p>
-			<p>If you wish to make any changes, click on the edit icon next to the section you wish to change.</p>
+
 		</div>
 
 		<div class="page-info">
 			@if (Model != null)
 			{
 				<div class="account-details">
-					<p>User ID: @Model.UserId</p>
-					<p>User First Name: @Model.FirstName</p>
-					<p>User Last Name: @Model.LastName</p>
-					<p>User Email: @Model.Email</p>
-					<p>User Password: @Model.Password</p>
-					@foreach (var role in Model.Role)
-					{
-						<p>User Role: @role</p>
-					}
+					<p>First Name: @Model.FirstName</p>
+					<p>Last Name: @Model.LastName</p>
+					<p>Email: @Model.Email</p>
+					<p>Role: @Model.Role</p>
 				</div>
 			}
 		</div>

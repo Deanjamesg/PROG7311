@@ -1,0 +1,109 @@
+﻿@using AECPrototype.ViewModel;
+@model FilterProductViewModel;
+@section Styles {
+	<link rel="stylesheet" href="~/css/filter-style.css" asp-append-version="true" />
+}
+@{
+	ViewData["Title"] = "Search Products";
+}
+
+<div class="page-wrapper">
+	<div class="page-content">
+
+		<div class="page-header">
+			<h1>Search for Products</h1>
+			<p>Filter products by a date range, category or by a farmer!</p>
+		</div>
+
+		<form asp-action="FilterProduct" asp-controller="Product" method="post">
+			<div class="filter-products">
+
+				<div class="filters-container">
+					<div class="input-box">
+						<select asp-for="SelectedCategory" class="styled-select">
+							<option value="">All Categories</option>
+							@if (Model != null && Model.Categories != null)
+							{
+								foreach (var category in Model.Categories)
+								{
+									<option value="@category">@category</option>
+								}
+							}
+						</select>
+					</div>
+
+					<div class="input-box">
+						<select asp-for="SelectedFarmer" class="styled-select">
+							<option value="">All Farmers</option>
+							@if (Model != null && Model.Farmers != null)
+							{
+								foreach (var farmer in Model.Farmers)
+								{
+									<option value="@farmer.FarmerId">@farmer.FarmerName</option>
+								}
+							}
+						</select>
+					</div>
+
+					<div class="input-box">
+						<input asp-for="ToDate" type="date" autocomplete="off" placeholder="" />
+						<label asp-for="ToDate">To Date</label>
+						<span asp-validation-for="ToDate" class="text-danger"></span>
+					</div>
+
+					<div class="input-box">
+						<input asp-for="FromDate" type="date" autocomplete="off" placeholder="" />
+						<label asp-for="FromDate">From Date</label>
+						<span asp-validation-for="FromDate" class="text-danger"></span>
+					</div>
+
+				</div>
+				<button class="large-btn" type="submit">Filter</button>
+			</div>
+			
+		</form>
+		<div class="page-table">
+			@if (Model != null && Model.Products != null && Model.Products.Any())
+			{
+				<h3>Filtered Results (@Model.Products.Count)</h3>
+				<div class="table-responsive">
+					<table class="styled-table">
+						<thead>
+							<tr>
+								<th>Product ID</th>
+								<th>Title</th>
+								<th>Category</th>
+								<th>Production Date</th>
+								<th>Farmer</th> 
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var product in Model.Products)
+							{
+								<tr>
+									<td data-label="Id">@product.Id</td>
+									<td data-label="Title">@product.Title</td>
+									<td data-label="Category">@product.Category</td>
+									<td data-label="Date">@product.Date.ToString("yyyy-MM-dd")</td>
+									<td data-label="Farmer">@product.FarmerName</td>
+								</tr>
+							}
+						</tbody>
+					</table>
+				</div>
+			}
+			else if (Context.Request.Query.Any())
+			{
+				<div class="empty-state">
+					<p>No products found matching your criteria.</p>
+				</div>
+			}
+			else
+			{
+				<div class="empty-state">
+					<p>Please use the filters above to search for products.</p>
+				</div>
+			}
+		</div>
+	</div>
+</div>

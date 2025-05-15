@@ -4,67 +4,13 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - AECPrototype</title>
-    @* <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" /> *@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    @* <link rel="stylesheet" href="~/AECPrototype.styles.css" asp-append-version="true" /> *@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
-
-    <div class="sidebar">
-        <div class="logo-menu">
-            <h2 class="logo">Energy</h2>
-            <i class="bx bx-menu toggle-btn"></i>
-        </div>
-
-        <ul class="list">
-
-            <li class="list-item">
-                <a class="nav-link" asp-controller="Home" asp-action="Index">
-                    <i class="bx bx-home"></i>
-                    <span class="link-name" style="--i:1;">Home</span>
-                </a>
-            </li>
-
-            <li class="list-item">
-                <a class="nav-link" asp-controller="User" asp-action="Profile">
-                    <i class='bx bx-user'></i>
-                    <span class="link-name" style="--i:2;">Profile</span>
-                </a>
-            </li>
-
-            <li class="list-item">
-                <a href="#">
-                    <i class='bx bx-message-rounded-dots'></i>
-                    <span class="link-name" style="--i:3;">Forums</span>
-                </a>
-            </li>
-
-            <li class="list-item">
-                <a href="#">
-                    <i class='bx bx-cart'></i>
-                    <span class="link-name" style="--i:4;">Market Place</span>
-                </a>
-            </li>
-
-            <li class="list-item">
-                <a class ="nav-link" asp-controller="User" asp-action="Create">
-                    <i class='bx bx-user-plus'></i>
-                    <span class="link-name" style="--i:5;">Register User</span>
-                </a>
-            </li>
-
-            <li class="list-item">
-                <a href="#">
-                    <i class='bx bx-cog'></i>
-                    <span class="link-name" style="--i:6;">Setting</span>
-                </a>
-            </li>
-
-        </ul>
-
-    </div>
+    <partial name="LoginPartial" />
 
         <main role="main">
             @RenderBody()

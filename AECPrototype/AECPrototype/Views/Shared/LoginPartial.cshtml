@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<User> signInManager;
+
+@{
+	var signedIn = signInManager.IsSignedIn(User);
+}
+
+@if (!signedIn)
+{
+	<div class="rightbar">
+		<a asp-action="Login" asp-controller="User" class="button-partial">Login</a>
+	</div>
+}
+else
+{
+	<div class="rightbar">
+		<form asp-action="Logout" asp-controller="User" method="post">
+			<button class="button-partial" type="submit">Logout</button>
+		</form>
+	</div>
+}
+
+<div class="sidebar">
+	<div class="logo-menu">
+		<h2 class="logo">Menu</h2>
+		<i class="bx bx-menu toggle-btn"></i>
+	</div>
+
+	<ul class="list">
+		<li class="list-item">
+			<a class="nav-link" asp-controller="Home" asp-action="Index">
+				<i class="bx bx-home"></i>
+				<span class="link-name" style="--i:1;">Home</span>
+			</a>
+		</li>
+
+		@if (signedIn)
+		{
+			<li class="list-item">
+				<a class="nav-link" asp-controller="User" asp-action="Profile">
+					<i class='bx bx-user'></i>
+					<span class="link-name" style="--i:2;">Profile</span>
+				</a>
+			</li>
+
+
+			<li class="list-item">
+				<a class="nav-link" asp-controller="Product" asp-action="SearchProducts">
+					<i class='bx bx-filter-alt'></i>
+					<span class="link-name" style="--i:3;">Filter Products</span>
+				</a>
+			</li>
+
+			<li class="list-item">
+				<a class="nav-link" asp-controller="User" asp-action="Create">
+					<i class='bx bx-user-plus'></i>
+					<span class="link-name" style="--i:4;">Register User</span>
+				</a>
+			</li>
+
+			<li class="list-item">
+				<a class="nav-link" asp-controller="Product" asp-action="AddProduct">
+					<i class='bx bx-plus'></i>
+					<span class="link-name" style="--i:5;">Add Product</span>
+				</a>
+			</li>
+
+			<li class="list-item">
+				<a class="nav-link" asp-controller="Product" asp-action="UserProduct">
+					<i class='bx bx-leaf'></i>
+					<span class="link-name" style="--i:6;">Your Products</span>
+				</a>
+			</li>
+		}
+
+	</ul>
+</div>
+
+
+
+
+
+
+

@@ -12,7 +12,6 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ProductService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -33,13 +32,24 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/User/Login";
+    options.AccessDeniedPath = "/User/UnauthorizedAccess";
+});
+
 var app = builder.Build();
 
-// Create roles on application start up.
 using (var scope = app.Services.CreateScope())
 {
+
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    context.Database.EnsureCreated();
+
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
     string[] roles = { "Farmer", "Employee" };
+
     foreach (var role in roles)
     {
         if (!await roleManager.RoleExistsAsync(role))

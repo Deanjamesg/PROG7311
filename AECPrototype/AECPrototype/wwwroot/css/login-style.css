@@ -1,0 +1,181 @@
+﻿
+.input-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    background: var(--second-color);
+    backdrop-filter: blur(50px);
+    box-shadow: var(--box-shadow);
+}
+
+    .input-form ion-icon {
+        --ionicon-stroke-width: 14px;
+        font-size: 150px;
+        margin-bottom: 35px;
+    }
+
+.input-box {
+    position: relative;
+    width: 350px;
+    height: 50px;
+    border-bottom: 2px solid #000;
+    margin-bottom: 60px;
+    color: #000;
+}
+
+.input-box ion-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 25px;
+    color: #000;
+    --ionicon-stroke-width: 40px;
+}
+
+    .input-box label {
+        position: absolute;
+        left: 5px;
+        top: 40%;
+        font-size: 18px;
+        font-weight: 500;
+        pointer-events: none;
+        transform: translateY(-50%);
+        transition: .5s;
+    }
+
+    .input-box input {
+        width: 100%;
+        height: 40px;
+        font-size: 18px;
+        font-weight: 400;
+        background: transparent;
+        color: #000;
+        border: none;
+        outline: none;
+        padding: 0 45px 0 5px;
+    }
+        .input-box input:focus ~ label,
+        .input-box input:not(:placeholder-shown) ~ label {
+            top: -5px;
+        }
+
+.input-form .large-btn {
+    width: 350px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 10px;
+    background: var(--third-color);
+    border: none;
+    box-shadow: var(--button-shadow);
+    transition: .3s;
+    cursor: pointer;
+    margin-top: 30px;
+}
+
+    .input-form .large-btn:hover {
+        box-shadow: var(--button-hover-shadow);
+    }
+
+.input-form .input-box .text-danger {
+    color: #fff;
+    align-self: start;
+    justify-self: start;
+    display: block;
+    font-size: 14px;
+    font-weight: 300;
+    margin: 0px;
+    margin-top: 15px;
+}
+
+.input-box-remember {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 350px;
+    height: 30px;
+    border-bottom: none;
+    color: #000;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+
+.input-box-remember input[type="checkbox"] {
+    opacity: 0; 
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0); 
+    border: 0;
+}
+
+.input-box-remember label {
+    position: relative;
+    padding-left: 30px; 
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    line-height: 1.2;
+}
+
+.input-box-remember label::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 15px;
+    border: 2px solid #000;
+    background-color: #fff;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.input-box-remember input[type="checkbox"]:checked + label::before {
+    content: "✔";
+    background-color: #000;
+    border-color: transparent;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.input-box-remember input[type="checkbox"]:focus + label::before {
+    border-color: none;
+}
+
+.alert-fail {
+    display: flex;
+    width: 275px;
+    height: 35px;
+    text-align: center;
+    justify-self: center;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    font-size: 15px;
+    color: #ff5d5d;
+    border-radius: 8px;
+    font-weight: 400;
+    background: var(--third-color);
+    box-shadow: var(--button-shadow);
+    margin-top: 25px;
+}

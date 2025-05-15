@@ -25,6 +25,19 @@ namespace AECPrototype.ViewModel
         public string ConfirmPassword { get; set; }
 
         [Required(ErrorMessage = "Please select a role.")]
+        [NotRole(ErrorMessage = "Please select a role.")]
         public string Role { get; set; }
+    }
+
+    public class NotRoleAttribute : ValidationAttribute
+    {
+        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        {
+            if (value != null && value.ToString() == "Role")
+            {
+                return new ValidationResult("Please select a role.");
+            }
+            return ValidationResult.Success;
+        }
     }
 }

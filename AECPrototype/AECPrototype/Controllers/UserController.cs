@@ -1,29 +1,34 @@
 ﻿using AECPrototype.Models;
 using AECPrototype.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace AECPrototype.Controllers
 {
     public class UserController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        //private readonly UserService _userService;
+        private readonly ILogger<UserController> logger;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
-        public UserController(ILogger<HomeController> logger, UserManager<User> _userManager, SignInManager<User> _signInManager)
+        public UserController(ILogger<UserController> _logger, UserManager<User> _userManager, SignInManager<User> _signInManager)
         {
-            _logger = logger;
+            logger = _logger;
             userManager = _userManager;
             signInManager = _signInManager;
         }
 
+        public IActionResult UnauthorizedAccess()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Employee")]
+        [HttpGet]
         public IActionResult Create()
         {
+            ViewBag.SuccessMessage = TempData["SuccessMessage"] as string;
             return View();
         }
 
@@ -32,7 +37,9 @@ namespace AECPrototype.Controllers
             return View();
         }
 
+
         [HttpPost]
+        [Authorize(Roles = "Employee")]
         public async Task<IActionResult> Create(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -49,12 +56,11 @@ namespace AECPrototype.Controllers
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User registered successfully: {Email}", model.Email);
-
                     await userManager.AddToRoleAsync(user, model.Role);
 
-                    return View(model);
+                    return RedirectToAction("Create");
                 }
+
                 else
                 {
                     foreach (var error in result.Errors.Where(e => e.Code != "DuplicateUserName"))
@@ -70,12 +76,13 @@ namespace AECPrototype.Controllers
             return View(model);
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, false, false);
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
 
                 if (result.Succeeded)
                 {
@@ -83,38 +90,39 @@ namespace AECPrototype.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("Email", "Invalid email or password.");
+                    ViewBag.FailedMessage = "Invalid email or password.";
                     return View(model);
                 }
             }
             return View(model);
         }
 
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize(Roles = "Farmer, Employee")]
         public async Task<IActionResult> Profile()
         {
-            if (signInManager.IsSignedIn(User))
+            var user = await userManager.GetUserAsync(User);
+
+            var role = (await userManager.GetRolesAsync(user)).FirstOrDefault();
+
+            UserViewModel model = new UserViewModel
             {
-                var user = await userManager.GetUserAsync(User);
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Role = role
+            };
 
-                if (user != null)
-                {
-                    var roles = await userManager.GetRolesAsync(user);
+            ViewBag.SuccessMessage = TempData["SuccessMessage"] as string;
 
-                    UserViewModel model = new UserViewModel
-                    {
-                        UserId = user.Id.ToString(),
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        Email = user.Email,
-                        Password = user.PasswordHash,
-                        Role = roles.ToList()
-                    };
-                    return View(model);
-                }
-            }
-
-            return RedirectToAction("Login");
-
+            return View(model);
         }
+
     }
 }
