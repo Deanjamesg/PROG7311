@@ -47,6 +47,12 @@ Farmer 2:
 
 ## 4. How to Run Prototype:
 
+Step 1: Open up the .ReadMe and go to the GitHub link: https://github.com/Deanjamesg/PROG7311.
+Step 2: Create a fork of the repository on your local device / computer.
+Step 3: Open the Visual Studio application, and then click "Open Project" and locate the file of the local fork of the repository on your computer.
+Step 4: Open AECPrototype folder, then select the AECPrototype.sln and click "Open".
+Step 5: Once the project has opened on your Visual Studio application, you can click "Run Application."
+
 ## 5. References:
 
 1. Microsoft, 2025. UserManager<TUser> Class (Microsoft.AspNetCore.Identity). [online] Available at: https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.identity.usermanager-1?view=aspnetcore-9.0 [Accessed 12 May 2025].
